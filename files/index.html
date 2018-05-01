@@ -2,20 +2,49 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FCN Quality Dashboard</title>
+<title>FCN Quality</title>
 <style>
 	body{
-		margin:1em auto;
-
-		padding:0 .62em;
-		font:1.2em/1.62 sans-serif;
-		background-color:#ddf;
+		max-width: 650px;
+  		margin: 40px auto;
+  		padding: 0 10px;
+  		font: 18px/1.5 -apple-system, BlinkMacSystemFont,
+               'avenir next', avenir, 
+               'Segoe UI', 
+               'lucida grande', 
+               'helvetica neue', helvetica, 
+               'Fira Sans', 
+               roboto, noto, 
+               'Droid Sans', 
+               cantarell, oxygen, ubuntu,
+               'franklin gothic medium', 'century gothic',
+               'Liberation Sans',
+               sans-serif;
+		color: #444;
 	}
 	h1,h2,h3 {
 		line-height:1.2;
+		font-weight:700
+	}
+	
+	text {
+		font: 18px/1.5 -apple-system, BlinkMacSystemFont,
+               'avenir next', avenir, 
+               'Segoe UI', 
+               'lucida grande',
+               'helvetica neue', helvetica,
+               'Fira Sans',
+               roboto, noto,
+               'Droid Sans',
+               cantarell, oxygen, ubuntu,
+               'franklin gothic medium', 'century gothic', 
+               'Liberation Sans',
+               sans-serif; 
+		color: #222;
+		font-weight:700
 	}
 	object {
-	max-width:30%;
+		max-width:30%;
 	}
 	@media print{
 		body{
@@ -26,7 +55,6 @@
 <article>
 	<header>
 		<h1>FCN Quality Dashboard</h1>
-		<aside>And it’s awesome.</aside>
 	</header>
 	<h2>Diabetes</h2>
 	<object type="image/svg+xml" data="DM_Eye_Exam.svg"></object>
