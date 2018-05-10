@@ -1,0 +1,41 @@
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as font_manager
+
+# Matplotlib Specifics
+# %matplotlib inline
+plt.style.use('fivethirtyeight')
+plt.rcParams["svg.fonttype"] = "none"
+plt.rcParams["font.family"] = "Bitstream Vera Sans"
+plt.rcParams["figure.titleweight"] = 'Bold'
+plt.rcParams['figure.titlesize'] = 'xx-large'
+
+for name in df.Name.unique():
+#name = 'NCFP'
+
+    foldername = name.replace(" ", "_")
+
+    Provider = df[df['Name'] == name]
+    Provider.dropna(inplace=True)
+
+    for number, metric in enumerate(Provider.Metric.unique()):
+        ProviderMetric = Provider[Provider['Metric'] == metric]
+        ax = ProviderMetric.plot(x="Date", y="Percentage", legend=False, ylim=(0,100), figsize=(6,6))
+        ax.set_xlabel("")
+
+        # Let's Do ever third tick mark (quarters)
+        ax.set_xticks(ax.get_xticks()[::3])
+        fig = ax.get_figure()
+        fig.patch.set_facecolor('none')
+        ax.patch.set_facecolor('white')
+        ax.patch.set_alpha(0.8)
+        fig.suptitle(metric, fontsize=20, fontweight='bold')
+        fig.tight_layout(pad=2)
+
+        metricfilename = metric.replace(" ", "_")
+        if not os.path.exists("./matplotlib-output/" + foldername):
+            os.makedirs("./matplotlib-output/" + foldername)
+        fig.savefig("./matplotlib-output/" + foldername + "/" + metricfilename + ".svg", facecolor=fig.get_facecolor(), edgecolor='none')
+        plt.close(fig)
+
+    shutil.copyfile('./files/index.html', './matplotlib-output/' + foldername + '/index.html') 
+
