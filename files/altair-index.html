@@ -12,47 +12,70 @@
 <script src="https://cdn.jsdelivr.net/npm/vega-embed@3.14.0/build/vega-embed.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.4/css/uikit.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.4/js/uikit.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.4/js/uikit-icons.min.js"></script>
 </head>
 
 <body>
 <div class="uk-container">
-<h1 class="uk-heading-primary">FCN Quality</h1>
 
-
-<h2>Diabetes</h2>
-<div class="uk-grid-small uk-child-auto uk-text-center" uk-grid>
-    <div>
-        <div id="DM_Eye_Exam" class="uk-card uk-card-small uk-card-default uk-card-body"></div>
+<div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+<nav class="uk-navbar-container uk-margin uk-background-primary" uk-navbar>
+    <div class="uk-navbar-left">
+    {{{Provider}}}
     </div>
-    <div>
-        <div id="DM_Foot_Exam" class="uk-card uk-card-small uk-card-default uk-card-body"></div>
+    <div class="uk-navbar-right">
+    <button class="uk-button uk-button-secondary" type="button" uk-toggle="target: #offcanvas-flip">Pick Provider</button>
     </div>
-    <div>
-        <div id="DM_Nephropathy" class="uk-card uk-card-small uk-card-default uk-card-body"></div>
-    </div>
-    <div>
-        <div id="DM_Pneumovax" class="uk-card uk-card-small uk-card-default uk-card-body"></div>
-    </div>
-    <div>
-        <div id="DM_with_ACE_or_ARB" class="uk-card uk-card-small uk-card-default uk-card-body"></div>
-    </div>
-    <div>
-        <div id="DM_with_Statin" class="uk-card uk-card-small uk-card-default uk-card-body"></div>
-    </div>
+</nav>
 </div>
-<hr class="uk-divider-icon">
 
-<h2>Screening</h2>
-	<div id="Colorectal_Screen"></div>
-	<div id="Pap_Smears"></div>
-	<div id="Mammogram"></div>
-	<div id="Chlamydia"></div>
-	<div id="AAA"></div>
-<h2>Immunizations</h2>
-	<div id="65+_Pneumovax"></div>
-	<div id="Smoker_Pneumovax"></div>
-	<div id="TD,TDAP"></div>
+<div class="uk-offcanvas-content">
+    <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
+        <div class="uk-offcanvas-bar">
+
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+            <h3>Title</h3>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+        </div>
+    </div>
+
+</div>
+
+<ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
+    <li><a href="#">Diabetes</a></li>
+    <li><a href="#">Screening</a></li>
+    <li><a href="#">Immunization</a></li>
+</ul>
+
+
+<ul class="uk-switcher uk-margin">
+    <li><div class="uk-grid-small uk-child-auto uk-text-center" uk-grid>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Eye Exam</h3><div id="DM_Eye_Exam"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Foot Exam</h3><div id="DM_Foot_Exam" ></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Nephropathy</h3><div id="DM_Nephropathy"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Pneumovax</h3><div id="DM_Pneumovax"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">ACE/ARB</h3><div id="DM_with_ACE_or_ARB"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Statin</h3><div id="DM_with_Statin"></div></div></div>
+	</div></li>
+
+    <li><div class="uk-grid-small uk-child-auto uk-text-center" uk-grid>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Colon Cancer</h3><div id="Colorectal_Screen"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Pap Smears</h3><div id="Pap_Smears" ></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Mammograms</h3><div id="Mammogram"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Chlamydia</h3><div id="Chlamydia"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">AAA</h3><div id="AAA"></div></div></div>
+	</div></li>
+
+    <li><div class="uk-grid-small uk-child-auto uk-text-center" uk-grid>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Pneumovax (Over 65)</h3><div id="65+_Pneumovax"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Pneumovax (Smoker)</h3><div id="Smoker_Pneumovax" ></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">TDAP</h3><div id="TD,TDAP"></div></div></div>
+	</div></li>
+</ul>
+
+
 </div>
 
 <script type="text/javascript">
