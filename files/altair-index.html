@@ -1,181 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<head>
+<title>Population Health Quality</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FCN Quality</title>
-<style>
-	body{
-		max-width: 650px;
-  		margin: 40px auto;
-  		padding: 0 10px;
-  		font: 18px/1.5 -apple-system, BlinkMacSystemFont,
-               'avenir next', avenir, 
-               'Segoe UI', 
-               'lucida grande', 
-               'helvetica neue', helvetica, 
-               'Fira Sans', 
-               roboto, noto, 
-               'Droid Sans', 
-               cantarell, oxygen, ubuntu,
-               'franklin gothic medium', 'century gothic',
-               'Liberation Sans',
-               sans-serif;
-		color: #444;
-	}
-	h1,h2,h3 {
-		line-height:1.2;
-		font-weight:700
-	}
-	
-	text {
-		font: 18px/1.5 -apple-system, BlinkMacSystemFont,
-               'avenir next', avenir, 
-               'Segoe UI', 
-               'lucida grande',
-               'helvetica neue', helvetica,
-               'Fira Sans',
-               roboto, noto,
-               'Droid Sans',
-               cantarell, oxygen, ubuntu,
-               'franklin gothic medium', 'century gothic', 
-               'Liberation Sans',
-               sans-serif; 
-		color: #222;
-		font-weight:700
-	}
-	object {
-		max-width:30%;
-	}
-	@media print{
-		body{
-			max-width:none
-		}
-	}
-</style>
-<style>
-    .vega-actions a {
-        margin-right: 12px;
-        color: #757575;
-        font-weight: normal;
-        font-size: 13px;
-    }
-    .error {
-        color: red;
-    }
-  </style>
 <script src="https://vega.github.io/vega/assets/promise.min.js"></script>
 <script src="https://vega.github.io/vega/assets/symbol.min.js"></script>
 <script src="https://vega.github.io/vega/assets/fetch.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm//vega@3.3.1"></script>
-<script src="https://cdn.jsdelivr.net/npm//vega-lite@2.4.1"></script>
-<script src="https://cdn.jsdelivr.net/npm//vega-embed@3.9"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega@4.0.0-rc.2/build/vega.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@2.5.0/build/vega-lite.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@3.14.0/build/vega-embed.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.4/css/uikit.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.4/js/uikit.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.4/js/uikit-icons.min.js"></script>
+</head>
 
-<article>
-	<header>
-		<h1>FCN Quality Dashboard</h1>
-	</header>
-	<h2>Diabetes</h2>
-	<div id="DM_Eye_Exam"></div>
-	<div id="DM_Foot_Exam"></div>
-	<div id="DM_Nephropathy"></div>
-	<div id="DM_Pneumovax"></div>
-	<div id="DM_with_ACE_or_ARB"></div>
-	<div id="DM_with_Statin"></div>
-	<h2>Screening</h2>
+<body>
+<div class="uk-container">
+<h1 class="uk-heading-primary">FCN Quality</h1>
+
+
+<h2>Diabetes</h2>
+<div class="uk-grid-small uk-child-auto uk-text-center" uk-grid>
+    <div>
+        <div id="DM_Eye_Exam" class="uk-card uk-card-small uk-card-default uk-card-body"></div>
+    </div>
+    <div>
+        <div id="DM_Foot_Exam" class="uk-card uk-card-small uk-card-default uk-card-body"></div>
+    </div>
+    <div>
+        <div id="DM_Nephropathy" class="uk-card uk-card-small uk-card-default uk-card-body"></div>
+    </div>
+    <div>
+        <div id="DM_Pneumovax" class="uk-card uk-card-small uk-card-default uk-card-body"></div>
+    </div>
+    <div>
+        <div id="DM_with_ACE_or_ARB" class="uk-card uk-card-small uk-card-default uk-card-body"></div>
+    </div>
+    <div>
+        <div id="DM_with_Statin" class="uk-card uk-card-small uk-card-default uk-card-body"></div>
+    </div>
+</div>
+<hr class="uk-divider-icon">
+
+<h2>Screening</h2>
 	<div id="Colorectal_Screen"></div>
 	<div id="Pap_Smears"></div>
 	<div id="Mammogram"></div>
 	<div id="Chlamydia"></div>
 	<div id="AAA"></div>
-	<h2>Immunizations</h2>
+<h2>Immunizations</h2>
 	<div id="65+_Pneumovax"></div>
 	<div id="Smoker_Pneumovax"></div>
 	<div id="TD,TDAP"></div>
-</article>
+</div>
+
 <script type="text/javascript">
-  var spec = "./DM_Eye_Exam.json";
-  vegaEmbed('#DM_Eye_Exam', spec).then(function(result) {
-    // access view as result.view
-  }).catch(console.error);
+	function insert_chart(metric) {
+		var spec = "./" +metric + ".json"; 
+		var idname = "#" + metric
+		vegaEmbed(idname, spec, {actions: false}).then(function(result) {}).catch(console.error);
+	}
+
+	insert_chart('DM_Eye_Exam');
+	insert_chart('DM_Foot_Exam');
+	insert_chart('DM_Nephropathy');
+	insert_chart('DM_Pneumovax');
+	insert_chart('DM_with_ACE_or_ARB');
+	insert_chart('DM_with_Statin');
+	insert_chart('Colorectal_Screen');
+	insert_chart('Pap_Smears');
+	insert_chart('Mammogram');
+	insert_chart('Chlamydia');
+	insert_chart('AAA');
+	insert_chart('65+_Pneumovax');
+	insert_chart('Smoker_Pneumovax');
+	insert_chart('TD,TDAP');
 </script>
-<script type="text/javascript">
-  var spec = "./DM_Foot_Exam.json";
-  vegaEmbed('#DM_Foot_Exam', spec).then(function(result) {
-    // access view as result.view
-  }).catch(console.error);
-</script>
-<script type="text/javascript">
-  var spec = "./DM_Nephropathy.json";
-  vegaEmbed('#DM_Nephropathy', spec).then(function(result) {
-    // access view as result.view
-  }).catch(console.error);
-</script>
-<script type="text/javascript">
-  var spec = "./DM_Pneumovax.json";
-  vegaEmbed('#DM_Pneumovax', spec).then(function(result) {
-    // access view as result.view
-  }).catch(console.error);
-</script>
-<script type="text/javascript">
-  var spec = "./DM_with_ACE_or_ARB.json";
-  vegaEmbed('#DM_with_ACE_or_ARB', spec).then(function(result) {
-    // access view as result.view
-  }).catch(console.error);
-</script>
-<script type="text/javascript">
-  var spec = "./DM_with_Statin.json";
-  vegaEmbed('#DM_with_Statin', spec).then(function(result) {
-    // access view as result.view
-  }).catch(console.error);
-</script>
-<script type="text/javascript">
-  var spec = "./Colorectal_Screen.json";
-  vegaEmbed('#Colorectal_Screen', spec).then(function(result) {
-    // access view as result.view
-  }).catch(console.error);
-</script>
-<script type="text/javascript">
-  var spec = "./Pap_Smears.json";
-  vegaEmbed('#Pap_Smears', spec).then(function(result) {
-    // access view as result.view
-  }).catch(console.error);
-</script>
-<script type="text/javascript">
-  var spec = "./Mammogram.json";
-  vegaEmbed('#Mammogram', spec).then(function(result) {
-    // access view as result.view
-  }).catch(console.error);
-</script>
-<script type="text/javascript">
-  var spec = "./Chlamydia.json";
-  vegaEmbed('#Chlamydia', spec).then(function(result) {
-    // access view as result.view
-  }).catch(console.error);
-</script>
-<script type="text/javascript">
-  var spec = "./AAA.json";
-  vegaEmbed('#AAA', spec).then(function(result) {
-    // access view as result.view
-  }).catch(console.error);
-</script>
-<script type="text/javascript">
-  var spec = "./65+_Pneumovax.json";
-  vegaEmbed('#65+_Pneumovax', spec).then(function(result) {
-    // access view as result.view
-  }).catch(console.error);
-</script>
-<script type="text/javascript">
-  var spec = "./Smoker_Pneumovax.json";
-  vegaEmbed('#Smoker_Pneumovax', spec).then(function(result) {
-    // access view as result.view
-  }).catch(console.error);
-</script>
-<script type="text/javascript">
-  var spec = "./TD,TDAP.json";
-  vegaEmbed('#TD,TDAP', spec).then(function(result) {
-    // access view as result.view
-  }).catch(console.error);
-</script>
+</body>
 </html>
+
+
+
+
 
 
