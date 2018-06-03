@@ -20,10 +20,7 @@
 
 <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
 <nav class="uk-navbar-container uk-margin uk-background-primary" uk-navbar>
-    <div class="uk-navbar-left">{{{Provider}}}
-    </div>
-    <div class="uk-navbar-right">
-    <button class="uk-button uk-button-large uk-button-secondary" type="button" uk-toggle="target: #offcanvas-flip"><a href="" class="uk-icon-button uk-margin-small-right" uk-icon="users"></a></button>
+    <div class="uk-navbar-left"><span color='#1f77b4'>{{{Provider}}}</span> @ <span color='#ff7f0e'>{{{Clinic}}}</span>
     </div>
 </nav>
 </div>
@@ -36,6 +33,9 @@
         </div>
     </div>
 </div>
+
+<button class="uk-button uk-button-large uk-button-secondary" type="button" uk-toggle="target: #offcanvas-flip"><a href="" class="uk-icon-button uk-margin-small-right" uk-icon="users"></a></button>
+
 
 <ul uk-switcher="animation: uk-animation-fade" uk-tab>
     <li><a href="#">Screening</a></li>
