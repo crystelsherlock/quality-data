@@ -1,26 +1,26 @@
 Index,MeridiosMetric,Metric,Target,Metric Category
-0,AAA Screening,AAA,,Screening
+0,AAA Screening,AAA,0.8,Screening
 1,Advance Directive Patients >55yrs w/Advance Directive,Advanced Directives,,
 2,Blood Pressure NOT Controlled  >140/90 mm Hg,BP not under 140/90,,
-3,Chlamydia,Chlamydia,,Screening
-4,Colorectal Cancer Screening (Colonoscopy/Sigmoid/FIT test),Colorectal Screen,,Screening
+3,Chlamydia,Chlamydia,0.8,Screening
+4,Colorectal Cancer Screening (Colonoscopy/Sigmoid/FIT test),Colorectal Screen,0.74,Screening
 5,Diabetes Care Gaps ,DM Care Gaps,,Diabetes
-6,DM PTS 40 to 75 w/STATIN,DM with Statin,,Diabetes
-7,DM PTS 55-75 w/ACE/ARB,DM with ACE or ARB,,Diabetes
-8,Eye exam,DM Eye Exam,,Diabetes
-9,Foot Exam,DM Foot Exam,,Diabetes
+6,DM PTS 40 to 75 w/STATIN,DM with Statin,0.8,Diabetes
+7,DM PTS 55-75 w/ACE/ARB,DM with ACE or ARB,0.8,Diabetes
+8,Eye exam,DM Eye Exam,0.76,Diabetes
+9,Foot Exam,DM Foot Exam,0.78,Diabetes
 10,HgbA1c < 7.0,DM A1c under 7,,Diabetes
 11,HgbA1c NOT > 9.0 (poor control),DM A1c not over 9,,Diabetes
 12,Hypertension Patients 18-59 years BP <140/90,HTN Age18 to 59 under 140 SBP,,
 13,Hypertension Patients over 18 BP <140/90,HTN over age 18 under 140 SBP,,
 14,Hypertension Patients over 59 years BP <150/90,HTN over age 59 under 150 SBP,,
-15,Mammogram Ages 52 -74,Mammogram,,Screening
-16,Nephropathy Assessment,DM Nephropathy,,
-17,Pap Smear Report,Pap Smears,,Screening
-18,Pneumovax - DM patients w/current pneumovax,DM Pneumovax,,Immunization
-19,Pneumovax - Patients Age>65 w/current pneumovax,Over age 65 Pneumovax,,Immunization
-20,Pneumovax - Smokers w/current pneumovax,Smoker Pneumovax,,Immunization
-21,Smoking Cessation Advice or Treatment ,Smoking Cessation,,
-22,Statin patients with LDL in the past 365 days,Statin with LDL,,
-23,TD - Patients >18yrs with TD in last 10 years,TD and TDAP,,Immunization
-24,WCV 3-6 yr,WCC 3y to 6y,,
+15,Mammogram Ages 52 -74,Mammogram,0.78,Screening
+16,Nephropathy Assessment,DM Nephropathy,0.8,
+17,Pap Smear Report,Pap Smears,0.85,Screening
+18,Pneumovax - DM patients w/current pneumovax,DM Pneumovax,0.8,Immunization
+19,Pneumovax - Patients Age>65 w/current pneumovax,Over age 65 Pneumovax,0.8,Immunization
+20,Pneumovax - Smokers w/current pneumovax,Smoker Pneumovax,0.8,Immunization
+21,Smoking Cessation Advice or Treatment ,Smoking Cessation,0.8,
+22,Statin patients with LDL in the past 365 days,Statin with LDL,0.8,
+23,TD - Patients >18yrs with TD in last 10 years,TD and TDAP,0.8,Immunization
+24,WCV 3-6 yr,WCC 3y to 6y,0.9,
