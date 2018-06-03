@@ -1,69 +1,100 @@
-
-	
-	
-</div>
-</body>
-</html>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>FCN Quality</title>
-  <meta name="description" content="FCN Quality Dashboard">
-  <meta name="author" content="Jonathan Ploudre">
-
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="../../files/normalize.css">
-  <link rel="stylesheet" href="../../files/skeleton.css">
-
-  <!-- Favicon
-  <link rel="icon" type="image/png" href="images/favicon.png"> -->
-  
+<title>Population Health Quality</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://vega.github.io/vega/assets/promise.min.js"></script>
+<script src="https://vega.github.io/vega/assets/symbol.min.js"></script>
+<script src="https://vega.github.io/vega/assets/fetch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega@4.0.0-rc.2/build/vega.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@2.5.0/build/vega-lite.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@3.14.0/build/vega-embed.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.4/css/uikit.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.4/js/uikit.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.4/js/uikit-icons.min.js"></script>
 </head>
+
 <body>
+<div class="uk-container">
 
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container">
-  
-  	<div class="row">
-  	<h1>FCN Quality</h1>
-  	</div
-    <div class="row">
-      <div class="three.columns" >
-    <h2>Diabetes</h2>
-	<object type="image/svg+xml" data="DM_Eye_Exam.svg"></object>
-	<object type="image/svg+xml" data="DM_Foot_Exam.svg"></object>
-	<object type="image/svg+xml" data="DM_Nephropathy.svg"></object>
-	<object type="image/svg+xml" data="DM_Pneumovax.svg"></object>
-	<object type="image/svg+xml" data="DM_with_ACE_or_ARB.svg"></object>
-	<object type="image/svg+xml" data="DM_with_Statin.svg"></object>
-	<h2>Screening</h2>
-	<object type="image/svg+xml" data="Colorectal_Screen.svg"></object>
-	<object type="image/svg+xml" data="Pap_Smears.svg"></object>
-	<object type="image/svg+xml" data="Mammogram.svg"></object>
-	<object type="image/svg+xml" data="Chlamydia.svg"></object>
-	<object type="image/svg+xml" data="AAA.svg"></object>
-	<h2>Immunizations</h2>
-	<object type="image/svg+xml" data="65+_Pneumovax.svg"></object>
-	<object type="image/svg+xml" data="Smoker_Pneumovax.svg"></object>
-	<object type="image/svg+xml" data="TD,TDAP.svg"></object>
-	    </div>
+<div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+<nav class="uk-navbar-container uk-margin uk-background-primary" uk-navbar>
+    <div class="uk-navbar-left">{{{Provider}}}
     </div>
-    
-    
-  </div>
+    <div class="uk-navbar-right">
+    <button class="uk-button uk-button-large uk-button-secondary" type="button" uk-toggle="target: #offcanvas-flip"><a href="" class="uk-icon-button uk-margin-small-right" uk-icon="users"></a></button>
+    </div>
+</nav>
+</div>
 
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<div class="uk-offcanvas-content">
+    <div id="offcanvas-flip" uk-offcanvas="flip: true; overlay: true">
+        <div class="uk-offcanvas-bar">
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+        </div>
+    </div>
+</div>
+
+<ul uk-switcher="animation: uk-animation-fade" uk-tab>
+    <li><a href="#">Screening</a></li>
+    <li><a href="#">Immunization</a></li>
+    <li><a href="#">Diabetes</a></li>
+</ul>
+
+<ul class="uk-switcher uk-margin">
+    <li><div class="uk-grid-small uk-child-auto" uk-grid>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Colon Cancer</h3><div id="Colorectal_Screen"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Pap Smears</h3><div id="Pap_Smears" ></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Mammograms</h3><div id="Mammogram"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Chlamydia</h3><div id="Chlamydia"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">AAA</h3><div id="AAA"></div></div></div>
+	</div></li>
+
+    <li><div class="uk-grid-small uk-child-auto" uk-grid>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Pneumovax (65+)</h3><div id="Over_age_65_Pneumovax"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Pneumovax (Smoker)</h3><div id="Smoker_Pneumovax" ></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">TDAP</h3><div id="TD_and_TDAP"></div></div></div>
+	</div></li>
+	
+    <li><div class="uk-grid-small uk-child-auto" uk-grid>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Eye Exam</h3><div id="DM_Eye_Exam"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Foot Exam</h3><div id="DM_Foot_Exam" ></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Nephropathy</h3><div id="DM_Nephropathy"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Pneumovax (DM)</h3><div id="DM_Pneumovax"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">ACE/ARB</h3><div id="DM_with_ACE_or_ARB"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h3 class="uk-card-title">Statin</h3><div id="DM_with_Statin"></div></div></div>
+	</div></li>
+</ul>
+</div>
+
+<script type="text/javascript">
+	function insert_chart(metric) {
+		var spec = "./" +metric + ".json"; 
+		var idname = "#" + metric;
+		vegaEmbed(idname, spec, {actions: false}).then(function(result) {}).catch(console.error);
+	}
+	insert_chart('DM_Eye_Exam');
+	insert_chart('DM_Foot_Exam');
+	insert_chart('DM_Nephropathy');
+	insert_chart('DM_Pneumovax');
+	insert_chart('DM_with_ACE_or_ARB');
+	insert_chart('DM_with_Statin');
+	insert_chart('Colorectal_Screen');
+	insert_chart('Pap_Smears');
+	insert_chart('Mammogram');
+	insert_chart('Chlamydia');
+	insert_chart('AAA');
+	insert_chart('Over_age_65_Pneumovax');
+	insert_chart('Smoker_Pneumovax');
+	insert_chart('TD_and_TDAP');
+</script>
 </body>
 </html>
+
+
+
+
+
+
