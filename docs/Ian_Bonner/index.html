@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Population Health Quality</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://vega.github.io/vega/assets/promise.min.js"></script>
+<script src="https://vega.github.io/vega/assets/symbol.min.js"></script>
+<script src="https://vega.github.io/vega/assets/fetch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega@4.0.0-rc.2/build/vega.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@2.5.0/build/vega-lite.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@3.14.0/build/vega-embed.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.4/css/uikit.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.4/js/uikit.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.4/js/uikit-icons.min.js"></script>
+</head>
+
+<body>
+<div class="uk-container">
+<h3 class="uk-heading-line uk-text-center"><span><span style="color:#1f77b4">Ian Bonner</span>&nbsp;@&nbsp;<span style="color:#ff7f0e">BellB</span></span><h3>
+<button class="uk-align-left uk-button uk-button" type="button" uk-toggle="target: #offcanvas-flip"><a href="" class="uk-icon-button uk-margin-small-right" uk-icon="users"></a></button>
+<span class="uk-clearfix">&nbsp;</span>
+<div class="uk-offcanvas-content">
+    <div id="offcanvas-flip" uk-offcanvas="overlay: true">
+        <div class="uk-offcanvas-bar">
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+		<ul class="uk-nav-default uk-nav-parent-icon" uk-nav><li class="uk-parent"><a href="#">BBFM</a><ul class="uk-nav-sub"><li><a href="../Jessica_Klassen/">Jessica Klassen</a></li><li><a href="../Teresa_Regier/">Teresa Regier</a></li></ul></li><li class="uk-parent"><a href="#">BellB</a><ul class="uk-nav-sub"><li><a href="../Greg_Anderson/">Greg Anderson</a></li><li><a href="../Ian_Bonner/">Ian Bonner</a></li><li><a href="../Jim_Hopper/">Jim Hopper</a></li><li><a href="../Karen_O’Keefe/">Karen O’Keefe</a></li><li><a href="../Laura_Fox/">Laura Fox</a></li><li><a href="../Lisa_Van_Hofwegen/">Lisa Van Hofwegen</a></li><li><a href="../Melana_Schimke/">Melana Schimke</a></li><li><a href="../Sara_Bowling/">Sara Bowling</a></li></ul></li><li class="uk-parent"><a href="#">FFMC</a><ul class="uk-nav-sub"><li><a href="../Berdi_Sanford/">Berdi Sanford</a></li><li><a href="../Claudia_Rey/">Claudia Rey</a></li><li><a href="../Erin_Maloney/">Erin Maloney</a></li><li><a href="../Jennifer_Bates/">Jennifer Bates</a></li><li><a href="../John_Hruby/">John Hruby</a></li><li><a href="../Kalani_Synder/">Kalani Synder</a></li><li><a href="../Rebecca_Brejcha/">Rebecca Brejcha</a></li><li><a href="../Renay_Fredette/">Renay Fredette</a></li><li><a href="../Stephen_Lewis/">Stephen Lewis</a></li></ul></li><li class="uk-parent"><a href="#">FHA</a><ul class="uk-nav-sub"><li><a href="../Ashley_Yoder/">Ashley Yoder</a></li><li><a href="../Deborah_Hall/">Deborah Hall</a></li><li><a href="../Edward_Bloom/">Edward Bloom</a></li><li><a href="../Jessica_Bloom/">Jessica Bloom</a></li><li><a href="../Kellie_Jacobs/">Kellie Jacobs</a></li><li><a href="../Meghan_Lelonek/">Meghan Lelonek</a></li><li><a href="../Miriam_Shapiro/">Miriam Shapiro</a></li><li><a href="../Rodney_Anderson/">Rodney Anderson</a></li><li><a href="../Ryan_Honey/">Ryan Honey</a></li><li><a href="../Sharon_Kerlin/">Sharon Kerlin</a></li></ul></li><li class="uk-parent"><a href="#">IFP</a><ul class="uk-nav-sub"><li><a href="../Franklin_Bjorseth/">Franklin Bjorseth</a></li><li><a href="../Karen_Goodman/">Karen Goodman</a></li><li><a href="../Magaret_Sweeney/">Magaret Sweeney</a></li><li><a href="../Michael_James/">Michael James</a></li><li><a href="../Robert_Rieger/">Robert Rieger</a></li></ul></li><li class="uk-parent"><a href="#">LFM</a><ul class="uk-nav-sub"><li><a href="../Ashley_Snyder/">Ashley Snyder</a></li><li><a href="../John_Hiemstra/">John Hiemstra</a></li><li><a href="../Larry_Hartwell/">Larry Hartwell</a></li><li><a href="../Margaret_Burden/">Margaret Burden</a></li><li><a href="../Michael_Fleming/">Michael Fleming</a></li><li><a href="../Patricia_Payne-Zajac/">Patricia Payne-Zajac</a></li><li><a href="../Robin_Caldwell/">Robin Caldwell</a></li><li><a href="../Steven_Alexander/">Steven Alexander</a></li></ul></li><li class="uk-parent"><a href="#">NCFP</a><ul class="uk-nav-sub"><li><a href="../Erik_Bylund/">Erik Bylund</a></li><li><a href="../Janet_Hansom/">Janet Hansom</a></li><li><a href="../Jonathan_Gamson/">Jonathan Gamson</a></li><li><a href="../Jonathan_Ploudre/">Jonathan Ploudre</a></li><li><a href="../Kay-Kay_Gambs/">Kay-Kay Gambs</a></li><li><a href="../Lauren_Sauve/">Lauren Sauve</a></li><li><a href="../Lucia_Muller/">Lucia Muller</a></li><li><a href="../Roger_Estep/">Roger Estep</a></li><li><a href="../Ross_McConahey/">Ross McConahey</a></li><li><a href="../Sally_McPherson/">Sally McPherson</a></li><li><a href="../Sloane_Winkes/">Sloane Winkes</a></li></ul></li><li class="uk-parent"><a href="#">NSFM</a><ul class="uk-nav-sub"><li><a href="../Anneliese_Floyd/">Anneliese Floyd</a></li><li><a href="../April_Wakefield-Pagels/">April Wakefield-Pagels</a></li><li><a href="../Elizabeth_Gaylord/">Elizabeth Gaylord</a></li><li><a href="../Jason_Short/">Jason Short</a></li><li><a href="../John_Raduege/">John Raduege</a></li><li><a href="../Lisa_Brodsky/">Lisa Brodsky</a></li><li><a href="../Mary_Swanson/">Mary Swanson</a></li><li><a href="../Patrick_McLaughlin/">Patrick McLaughlin</a></li><li><a href="../Rory_Bradt/">Rory Bradt</a></li><li><a href="../Sarah_Herman/">Sarah Herman</a></li><li><a href="../Vicki_Short/">Vicki Short</a></li><li><a href="../William_Eiford/">William Eiford</a></li><li><a href="../Ying_Wu/">Ying Wu</a></li></ul></li><li class="uk-parent"><a href="#">SFM</a><ul class="uk-nav-sub"><li><a href="../Deborah_Roessler/">Deborah Roessler</a></li><li><a href="../Harry_Herdman/">Harry Herdman</a></li><li><a href="../Heather_Honey/">Heather Honey</a></li><li><a href="../Joy_Welty/">Joy Welty</a></li><li><a href="../Lillian_Pavlik/">Lillian Pavlik</a></li><li><a href="../Matt_Werner/">Matt Werner</a></li><li><a href="../Shelby_Hein/">Shelby Hein</a></li></ul></li><li class="uk-parent"><a href="#">WFM</a><ul class="uk-nav-sub"><li><a href="../Heather_Thomson/">Heather Thomson</a></li><li><a href="../Richard_Binder/">Richard Binder</a></li><li><a href="../Shannon_Billau/">Shannon Billau</a></li><li><a href="../Steven_Bloom/">Steven Bloom</a></li></ul></li>
+        </div>
+    </div>
+</div>
+
+
+
+<ul uk-switcher="animation: uk-animation-fade" uk-tab>
+    <li><a href="#">Screening</a></li>
+    <li><a href="#">Immunization</a></li>
+    <li><a href="#">Diabetes</a></li>
+</ul>
+
+<ul class="uk-switcher uk-margin">
+    <li><div class="uk-grid-small uk-child-width-auto" uk-grid>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h5 class="uk-card-title">Colon Cancer</h5><div id="Colorectal_Screen"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h5 class="uk-card-title">Pap Smears</h5><div id="Pap_Smears" ></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h5 class="uk-card-title">Mammograms</h5><div id="Mammogram"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h5 class="uk-card-title">Chlamydia</h5><div id="Chlamydia"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h5 class="uk-card-title">AAA</h5><div id="AAA"></div></div></div>
+	</div></li>
+
+    <li><div class="uk-grid-small uk-child-width-auto" uk-grid>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h5 class="uk-card-title">Pneumovax (65+)</h5><div id="Over_age_65_Pneumovax"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h5 class="uk-card-title">Pneumovax (Smoker)</h5><div id="Smoker_Pneumovax" ></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h5 class="uk-card-title">TDAP</h5><div id="TD_and_TDAP"></div></div></div>
+	</div></li>
+	
+    <li><div class="uk-grid-small uk-child-width-auto" uk-grid>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h5 class="uk-card-title">Eye Exam</h5><div id="DM_Eye_Exam"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h5 class="uk-card-title">Foot Exam</h5><div id="DM_Foot_Exam" ></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h5 class="uk-card-title">Nephropathy</h5><div id="DM_Nephropathy"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h5 class="uk-card-title">Pneumovax (DM)</h5><div id="DM_Pneumovax"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h5 class="uk-card-title">ACE/ARB</h5><div id="DM_with_ACE_or_ARB"></div></div></div>
+	<div><div  class="uk-card uk-card-small uk-card-default uk-card-body"><h5 class="uk-card-title">Statin</h5><div id="DM_with_Statin"></div></div></div>
+	</div></li>
+</ul>
+
+<hr class="uk-divider-icon">
+
+<p class="uk-text-small uk-text-meta">Updated: 2018-05-28 00:00:00</p>
+
+</div>
+
+<script type="text/javascript">
+	function insert_chart(metric) {
+		var spec = "./" +metric + ".json"; 
+		var idname = "#" + metric;
+		vegaEmbed(idname, spec, {actions: false}).then(function(result) {}).catch(console.error);
+	}
+	insert_chart('DM_Eye_Exam');
+	insert_chart('DM_Foot_Exam');
+	insert_chart('DM_Nephropathy');
+	insert_chart('DM_Pneumovax');
+	insert_chart('DM_with_ACE_or_ARB');
+	insert_chart('DM_with_Statin');
+	insert_chart('Colorectal_Screen');
+	insert_chart('Pap_Smears');
+	insert_chart('Mammogram');
+	insert_chart('Chlamydia');
+	insert_chart('AAA');
+	insert_chart('Over_age_65_Pneumovax');
+	insert_chart('Smoker_Pneumovax');
+	insert_chart('TD_and_TDAP');
+</script>
+</body>
+</html>
+
+
+
+
+
+
