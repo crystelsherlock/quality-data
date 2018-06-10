@@ -5,11 +5,13 @@ import numpy as np
 import pandas as pd
 import altair as alt
 from selenium import webdriver
+from numba import jit
 
 # Python Modules
 import glob as glob
 import os
 import datetime as datetime
+from multiprocessing import Pool
 
 # Read Lookup files into dataframes for mapping
 names = pd.read_csv("./files/names.csv", index_col="MeridiosName")
@@ -64,6 +66,7 @@ for file in files:
         # beginning of filename.
         raise ValueError("CSV Filename should have Zero Padded Date.")
 
+@jit
 def make_individual_metric_chart(metric, name):
     """
     Makes a chart for a single metric and a single provider.
@@ -82,10 +85,7 @@ def make_individual_metric_chart(metric, name):
     clinicdf = df[(df["Metric"] == metric) & (df["Name"] == clinic_name)]
 
     # Lookup the metric target -- not all metrics have a target.
-    try:
-        metric_target = metrics[metrics.Metric == metric].iloc[0].Target
-    except:
-        metric_target = False
+    metric_target = metrics[metrics.Metric == metric].iloc[0].Target
 
     # If there's a target value, we'll make a rule on graph.
     if metric_target:
@@ -179,7 +179,8 @@ def make_individual_metric_chart(metric, name):
             fcn_current_strip_chart + provider_highlight_strip + provider_percent
         )
         return chart
-
+        
+@jit
 def make_clinic_metric_chart(metric, clinic_name):
     """
     Makes a chart for a single metric and a clinic.
@@ -194,10 +195,7 @@ def make_clinic_metric_chart(metric, clinic_name):
         & (df["Name"] == clinic_name)
     ]
 
-    try:
-        metric_target = metrics[metrics.Metric == metric].iloc[0].Target
-    except:
-        metric_target = False
+    metric_target = metrics[metrics.Metric == metric].iloc[0].Target
 
     # If there's a target value, we'll make a rule on graph.
     if metric_target:
@@ -238,7 +236,7 @@ def make_clinic_metric_chart(metric, clinic_name):
         )
 
     clinic_providers = sorted(
-        set(singleprovider[singleprovider.Clinic == clinic_name].Name)
+        set(singleproviders[singleproviders.Clinic == clinic_name].Name)
     )
     current_date = max(df["Date"])
     current_metric = df[
@@ -323,21 +321,33 @@ def savefolder(name):
         os.makedirs("./docs/" + foldername)
     return "./docs/" + foldername + "/"
 
-for name in singleproviders.Name.unique():
+@jit
+def create_individual_metrics(name):
     for metric in main_metrics:
         chart = make_individual_metric_chart(metric, name)
         chart.save(
             savefolder(name) + str(metric).replace(" ", "_") + ".png",
         )
 
-for clinic_name in clinics:
+@jit
+def create_clinic_metrics(clinic_name):
     for metric in main_metrics:
         chart = make_clinic_metric_chart(metric, clinic_name)
         chart.save(
             savefolder(clinic_name) + str(metric).replace(" ", "_") + ".png",
         )
 
-or name in singleproviders.Name.unique():
+#pool = Pool(16)
+#pool.map(create_individual_metrics, singleproviders.Name.unique())
+#pool.close()
+#pool.join()
+
+pool2 = Pool(16)
+pool2.map(create_clinic_metrics, clinics)
+pool2.close()
+pool2.join()
+
+for name in singleproviders.Name.unique():
     provider_dropdown = (
         '<div class="uk-inline"><div class="uk-text-lead uk-text-bold" style="color:#1f77b4">'
         + name
