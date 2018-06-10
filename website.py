@@ -327,14 +327,14 @@ for name in singleproviders.Name.unique():
     for metric in main_metrics:
         chart = make_individual_metric_chart(metric, name)
         chart.save(
-            savefolder(name) + str(metric).replace(" ", "_") + ".png", scale_factor=2,
+            savefolder(name) + str(metric).replace(" ", "_") + ".png",
         )
 
 for clinic_name in clinics:
     for metric in main_metrics:
         chart = make_clinic_metric_chart(metric, clinic_name)
         chart.save(
-            savefolder(name) + str(metric).replace(" ", "_") + ".png", scale_factor=2,
+            savefolder(clinic_name) + str(metric).replace(" ", "_") + ".png",
         )
 
 for name in singleproviders.Name.unique():
