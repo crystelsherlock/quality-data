@@ -407,7 +407,7 @@ for name in singleproviders.Name.unique():
 for clinic in clinics:
     provider_dropdown = (
         '<div class="uk-inline"><div class="uk-text-lead" style="color:#1f77b4">'
-        + "Provider"
+        + "Providers"
         + '<span uk-icon="icon: triangle-down"></span>'
         + '</div><div uk-dropdown><ul class="uk-nav uk-dropdown-nav">'
     )
