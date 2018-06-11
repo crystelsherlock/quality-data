@@ -341,10 +341,10 @@ def create_clinic_metrics(clinic_name):
 #pool.close()
 #pool.join()
 
-pool2 = Pool()
-pool2.map(create_clinic_metrics, clinics)
-pool2.close()
-pool2.join()
+#pool2 = Pool()
+#pool2.map(create_clinic_metrics, clinics)
+#pool2.close()
+#pool2.join()
 
 
 # Provider HTML Files
@@ -479,7 +479,7 @@ for name in singleproviders.Name.unique():
     provider_index_cards += (
     '<li class="tag-'
     + names[names.Name == name].iloc[0].Clinic
-    + '"><a href="../'
+    + '"><a href="/'
     + str(name).replace(" ", "_")
     + '"><div class="uk-card uk-card-default uk-card-body">'
     + name
