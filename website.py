@@ -479,9 +479,9 @@ for name in singleproviders.Name.unique():
     provider_index_cards += (
     '<li class="tag-'
     + names[names.Name == name].iloc[0].Clinic
-    + '"><a href="/'
+    + '"><a href="./'
     + str(name).replace(" ", "_")
-    + '"><div class="uk-card uk-card-default uk-card-body">'
+    + '/"><div class="uk-card uk-card-default uk-card-body">'
     + name
     + '</div></li>\n'
     )
