@@ -5,7 +5,6 @@ import numpy as np
 import pandas as pd
 import altair as alt
 from selenium import webdriver
-from numba import jit
 
 # Python Modules
 import glob as glob
@@ -66,7 +65,7 @@ for file in files:
         # beginning of filename.
         raise ValueError("CSV Filename should have Zero Padded Date.")
 
-@jit
+
 def make_individual_metric_chart(metric, name):
     """
     Makes a chart for a single metric and a single provider.
@@ -180,7 +179,7 @@ def make_individual_metric_chart(metric, name):
         )
         return chart
         
-@jit
+
 def make_clinic_metric_chart(metric, clinic_name):
     """
     Makes a chart for a single metric and a clinic.
@@ -321,15 +320,15 @@ def savefolder(name):
         os.makedirs("./docs/" + foldername)
     return "./docs/" + foldername + "/"
 
-@jit
+
 def create_individual_metrics(name):
     for metric in main_metrics:
         chart = make_individual_metric_chart(metric, name)
         chart.save(
-            savefolder(name) + str(metric).replace(" ", "_") + ".png",
+            savefolder(name) + str(metric).replace(" ", "_") + ".png", 
         )
 
-@jit
+
 def create_clinic_metrics(clinic_name):
     for metric in main_metrics:
         chart = make_clinic_metric_chart(metric, clinic_name)
@@ -337,16 +336,18 @@ def create_clinic_metrics(clinic_name):
             savefolder(clinic_name) + str(metric).replace(" ", "_") + ".png",
         )
 
-#pool = Pool(16)
+#pool = Pool()
 #pool.map(create_individual_metrics, singleproviders.Name.unique())
 #pool.close()
 #pool.join()
 
-pool2 = Pool(16)
+pool2 = Pool()
 pool2.map(create_clinic_metrics, clinics)
 pool2.close()
 pool2.join()
 
+
+# Provider HTML Files
 for name in singleproviders.Name.unique():
     provider_dropdown = (
         '<div class="uk-inline"><div class="uk-text-lead uk-text-bold" style="color:#1f77b4">'
@@ -403,7 +404,7 @@ for name in singleproviders.Name.unique():
     filedata = filedata.replace("{{{Current Date}}}", current_date)
     with open(savefolder(name) + "index.html", "w+") as file:
         file.write(filedata)
-
+# Clinic HTML Files
 for clinic in clinics:
     provider_dropdown = (
         '<div class="uk-inline"><div class="uk-text-lead" style="color:#1f77b4">'
@@ -461,3 +462,35 @@ for clinic in clinics:
     with open(savefolder(clinic_name) + "index.html", "w+") as file:
         file.write(filedata)
 
+# Base HTML File
+root_index_clinic = '<div uk-filter="target: .js-filter"><ul class="uk-subnav uk-subnav-pill">\n'
+for clinic in clinics:
+    root_index_clinic += (
+    '<li uk-filter-control=".tag-'
+    + clinic
+    + '"><a href="#">'
+    + clinic
+    + '</a></li>\n' 
+    )
+root_index_clinic += '</ul>'
+
+provider_index_cards = '<ul class="js-filter uk-card-small uk-child-width-1-2 uk-child-width-1-4@m uk-text-center" uk-grid>\n'
+for name in singleproviders.Name.unique():
+    provider_index_cards += (
+    '<li class="tag-'
+    + names[names.Name == name].iloc[0].Clinic
+    + '"><a href="../'
+    + str(name).replace(" ", "_")
+    + '"><div class="uk-card uk-card-default uk-card-body">'
+    + name
+    + '</div></li>\n'
+    )
+provider_index_cards += '</ul>'
+
+with open("./files/index-base.html", "r") as file:
+    filedata = file.read()
+filedata = filedata.replace("{{{Clinics}}}", root_index_clinic)
+filedata = filedata.replace("{{{Provider-Index-Cards}}}", provider_index_cards)
+filedata = filedata.replace("{{{Current Date}}}", current_date)
+with open('docs/' + "index.html", "w+") as file:
+    file.write(filedata)
