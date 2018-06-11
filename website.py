@@ -474,14 +474,14 @@ for clinic in clinics:
     )
 root_index_clinic += '</ul>'
 
-provider_index_cards = '<ul class="js-filter uk-card-small uk-child-width-1-2 uk-child-width-1-4@m uk-text-center" uk-grid>\n'
+provider_index_cards = '<ul class="js-filter uk-grid-match uk-card-small uk-text-center" uk-grid>\n'
 for name in singleproviders.Name.unique():
     provider_index_cards += (
     '<li class="tag-'
     + names[names.Name == name].iloc[0].Clinic
     + '"><a href="./'
     + str(name).replace(" ", "_")
-    + '/"><div class="uk-card uk-card-default uk-card-body">'
+    + '/"><div class="uk-card uk-width-medium uk-card-hover uk-card-default uk-card-body">'
     + name
     + '</div></li>\n'
     )
