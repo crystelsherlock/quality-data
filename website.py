@@ -325,7 +325,7 @@ def create_individual_metrics(name):
     for metric in main_metrics:
         chart = make_individual_metric_chart(metric, name)
         chart.save(
-            savefolder(name) + str(metric).replace(" ", "_") + ".png", 
+            savefolder(name) + str(metric).replace(" ", "_") + ".png", scale_factor=2,
         )
 
 
@@ -333,18 +333,18 @@ def create_clinic_metrics(clinic_name):
     for metric in main_metrics:
         chart = make_clinic_metric_chart(metric, clinic_name)
         chart.save(
-            savefolder(clinic_name) + str(metric).replace(" ", "_") + ".png",
+            savefolder(clinic_name) + str(metric).replace(" ", "_") + ".png", scale_factor=2,
         )
 
-#pool = Pool()
-#pool.map(create_individual_metrics, singleproviders.Name.unique())
-#pool.close()
-#pool.join()
+pool = Pool()
+pool.map(create_individual_metrics, singleproviders.Name.unique())
+pool.close()
+pool.join()
 
-#pool2 = Pool()
-#pool2.map(create_clinic_metrics, clinics)
-#pool2.close()
-#pool2.join()
+pool2 = Pool()
+pool2.map(create_clinic_metrics, clinics)
+pool2.close()
+pool2.join()
 
 
 # Provider HTML Files
