@@ -9,6 +9,7 @@ from selenium import webdriver
 # Python Modules
 import glob as glob
 import os
+import shutil
 import datetime as datetime
 from multiprocessing import Pool
 
@@ -64,7 +65,6 @@ for file in files:
         # We're only appending data that had Zero Padded Date at
         # beginning of filename.
         raise ValueError("CSV Filename should have Zero Padded Date.")
-
 
 def make_individual_metric_chart(metric, name):
     """
@@ -178,7 +178,6 @@ def make_individual_metric_chart(metric, name):
             fcn_current_strip_chart + provider_highlight_strip + provider_percent
         )
         return chart
-        
 
 def make_clinic_metric_chart(metric, clinic_name):
     """
@@ -325,7 +324,7 @@ def create_individual_metrics(name):
     for metric in main_metrics:
         chart = make_individual_metric_chart(metric, name)
         chart.save(
-            savefolder(name) + str(metric).replace(" ", "_") + ".png", scale_factor=2,
+            savefolder(name) + str(metric).replace(" ", "_") + ".png", scale_factor=2
         )
 
 
@@ -333,7 +332,8 @@ def create_clinic_metrics(clinic_name):
     for metric in main_metrics:
         chart = make_clinic_metric_chart(metric, clinic_name)
         chart.save(
-            savefolder(clinic_name) + str(metric).replace(" ", "_") + ".png", scale_factor=2,
+            savefolder(clinic_name) + str(metric).replace(" ", "_") + ".png",
+            scale_factor=2,
         )
 
 pool = Pool()
@@ -346,11 +346,26 @@ pool2.map(create_clinic_metrics, clinics)
 pool2.close()
 pool2.join()
 
-
 # Provider HTML Files
-for name in singleproviders.Name.unique():
+for name in sorted(set(singleproviders.Name.unique())):
+    provider_picture = "./files/pictures/" + str(name).replace(" ", "_") + ".JPG"
+    if os.path.isfile(provider_picture):
+        if not os.path.exists("./docs/pictures/"):
+            os.makedirs("./docs/pictures/")
+        shutil.copyfile(
+            provider_picture, "./docs/pictures/" + str(name).replace(" ", "_") + ".JPG"
+        )
+        provider_icon = (
+            '<img src="'
+            + "../pictures/"
+            + str(name).replace(" ", "_")
+            + ".JPG"
+            + '" width="64" height="64">&nbsp;'
+        )
+
     provider_dropdown = (
-        '<div class="uk-inline"><div class="uk-text-lead uk-text-bold" style="color:#1f77b4">'
+        '<div class="uk-inline"><div class="uk-text-lead uk-text-bold uk-text-middle" style="color:#1f77b4">'
+        + provider_icon
         + name
         + '<span uk-icon="icon: triangle-down"></span>'
         + '</div><div uk-dropdown><ul class="uk-nav uk-dropdown-nav">'
@@ -380,7 +395,7 @@ for name in singleproviders.Name.unique():
     provider_dropdown += "</ul></div></div>"
 
     clinic_dropdown = (
-        '<div class="uk-inline"><div class="uk-text-lead" style="color:#ff7f0e">'
+        '<div class="uk-inline"><div class="uk-text-lead uk-text-middle" style="color:#ff7f0e">'
         + clinic_name
         + '<span uk-icon="icon: triangle-down"></span>'
         + '</div><div uk-dropdown><ul class="uk-nav uk-dropdown-nav">'
@@ -404,10 +419,11 @@ for name in singleproviders.Name.unique():
     filedata = filedata.replace("{{{Current Date}}}", current_date)
     with open(savefolder(name) + "index.html", "w+") as file:
         file.write(filedata)
+
 # Clinic HTML Files
 for clinic in clinics:
     provider_dropdown = (
-        '<div class="uk-inline"><div class="uk-text-lead" style="color:#1f77b4">'
+        '<div class="uk-inline"><div class="uk-text-lead uk-text-middle" style="color:#1f77b4">'
         + "Providers"
         + '<span uk-icon="icon: triangle-down"></span>'
         + '</div><div uk-dropdown><ul class="uk-nav uk-dropdown-nav">'
@@ -430,7 +446,7 @@ for clinic in clinics:
     provider_dropdown += "</ul></div></div>"
 
     clinic_dropdown = (
-        '<div class="uk-inline"><div class="uk-text-lead uk-text-bold" style="color:#ff7f0e">'
+        '<div class="uk-inline"><div class="uk-text-lead uk-text-bold uk-text-middle" style="color:#ff7f0e">'
         + clinic_name
         + '<span uk-icon="icon: triangle-down"></span>'
         + '</div><div uk-dropdown><ul class="uk-nav uk-dropdown-nav">'
@@ -461,36 +477,52 @@ for clinic in clinics:
     filedata = filedata.replace("{{{Current Date}}}", current_date)
     with open(savefolder(clinic_name) + "index.html", "w+") as file:
         file.write(filedata)
-
+        
 # Base HTML File
-root_index_clinic = '<div uk-filter="target: .js-filter"><ul class="uk-subnav uk-subnav-pill">\n'
-for clinic in clinics:
+root_index_clinic = (
+    '<div uk-filter="target: .js-filter"><ul class="uk-subnav uk-subnav-pill">\n'
+)
+for clinic in sorted(set(clinics)):
     root_index_clinic += (
-    '<li uk-filter-control=".tag-'
-    + clinic
-    + '"><a href="#">'
-    + clinic
-    + '</a></li>\n' 
+        '<li uk-filter-control=".tag-'
+        + clinic
+        + '"><a href="#">'
+        + clinic
+        + "</a></li>\n"
     )
-root_index_clinic += '</ul>'
+root_index_clinic += "</ul>"
 
-provider_index_cards = '<ul class="js-filter uk-grid-match uk-card-small uk-text-center" uk-grid>\n'
-for name in singleproviders.Name.unique():
+provider_index_cards = (
+    '<ul class="js-filter uk-grid-match uk-card-small uk-text-center" uk-grid>\n'
+)
+
+
+
+for name in sorted(set(singleproviders.Name.unique())):
+    provider_icon = (
+            '<img class="uk-align-center" src="'
+            + "./pictures/"
+            + str(name).replace(" ", "_")
+            + ".JPG"
+            + '" width="64" height="64">'
+        )
     provider_index_cards += (
-    '<li class="tag-'
-    + names[names.Name == name].iloc[0].Clinic
-    + '"><a href="./'
-    + str(name).replace(" ", "_")
-    + '/"><div class="uk-card uk-width-medium uk-card-hover uk-card-default uk-card-body">'
-    + name
-    + '</div></li>\n'
+        '<li class="tag-'
+        + names[names.Name == name].iloc[0].Clinic
+        + '"><a class="uk-align-center" href="./'
+        + str(name).replace(" ", "_")
+        + '/"><div class="uk-card uk-width-medium uk-card-hover uk-card-default uk-card-body">'
+        + provider_icon 
+        + name
+        + "</div></a></li>\n"
     )
-provider_index_cards += '</ul>'
+provider_index_cards += "</ul>"
 
 with open("./files/index-base.html", "r") as file:
     filedata = file.read()
 filedata = filedata.replace("{{{Clinics}}}", root_index_clinic)
 filedata = filedata.replace("{{{Provider-Index-Cards}}}", provider_index_cards)
 filedata = filedata.replace("{{{Current Date}}}", current_date)
-with open('docs/' + "index.html", "w+") as file:
+with open("docs/" + "index.html", "w+") as file:
     file.write(filedata)
+
