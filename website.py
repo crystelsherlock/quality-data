@@ -333,12 +333,12 @@ def create_clinic_metrics(clinic_name):
             scale_factor=2,
         )
 
-#pool = Pool()
-#pool.map(create_individual_metrics, singleproviders.Name.unique())
-#pool.close()
-#pool.join()
+pool = Pool(16)
+pool.map(create_individual_metrics, singleproviders.Name.unique())
+pool.close()
+pool.join()
 
-pool2 = Pool()
+pool2 = Pool(16)
 pool2.map(create_clinic_metrics, clinics)
 pool2.close()
 pool2.join()
@@ -357,7 +357,7 @@ for name in sorted(set(singleproviders.Name.unique())):
             + "../pictures/"
             + str(name).replace(" ", "_")
             + ".JPG"
-            + '" width="64" height="64">&nbsp;'
+            + '" width="64" height="64" class="uk-border-circle">&nbsp;'
         )
 
     provider_dropdown = (
@@ -467,7 +467,7 @@ for clinic in clinics:
 
     clinic_dropdown += "</ul></div></div>"
 
-    with open("./files/index.html", "r") as file:
+    with open("./files/index-clinic.html", "r") as file:
         filedata = file.read()
     filedata = filedata.replace("{{{Provider}}}", provider_dropdown)
     filedata = filedata.replace("{{{Clinic}}}", clinic_dropdown)
