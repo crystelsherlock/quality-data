@@ -91,7 +91,6 @@ def make_individual_metric_chart(metric, name):
         metricdf = pd.DataFrame([{"TargetValue": metric_target, "Title": "Target"}])
 
     # Make a Current dataframe to use for Strip Chart.
-    current_date = max(df["Date"])
     current_metric = df[
         (df["Metric"] == metric)
         & (df["Type"] == "Individual")
@@ -199,7 +198,6 @@ def make_clinic_metric_chart(metric, clinic_name):
     if metric_target:
         metricdf = pd.DataFrame([{"TargetValue": metric_target, "Title": "Target"}])
 
-    current_date = max(df["Date"])
     current_metric = df[
         (df["Metric"] == metric)
         & (df["Type"] == "Clinic")
@@ -236,14 +234,13 @@ def make_clinic_metric_chart(metric, clinic_name):
     clinic_providers = sorted(
         set(singleproviders[singleproviders.Clinic == clinic_name].Name)
     )
-    current_date = max(df["Date"])
     current_metric = df[
         (df["Metric"] == metric)
         & (df["Date"] == current_date)
         & (df["Name"].isin(clinic_providers))
     ]
 
-    start_date = min(df["Date"])
+    start_date = min(providerdf["Date"])
     start_metric = df[
         (df["Metric"] == metric)
         & (df["Date"] == start_date)
@@ -309,8 +306,8 @@ main_metrics = [
     "TD and TDAP",
 ]
 
-dt = max(df["Date"])
-current_date = dt.strftime("%m/%d/%Y")
+current_date = max(df["Date"])
+current_date_string = current_date.strftime("%m/%d/%Y")
 
 
 def savefolder(name):
@@ -336,10 +333,10 @@ def create_clinic_metrics(clinic_name):
             scale_factor=2,
         )
 
-pool = Pool()
-pool.map(create_individual_metrics, singleproviders.Name.unique())
-pool.close()
-pool.join()
+#pool = Pool()
+#pool.map(create_individual_metrics, singleproviders.Name.unique())
+#pool.close()
+#pool.join()
 
 pool2 = Pool()
 pool2.map(create_clinic_metrics, clinics)
@@ -416,7 +413,7 @@ for name in sorted(set(singleproviders.Name.unique())):
         filedata = file.read()
     filedata = filedata.replace("{{{Provider}}}", provider_dropdown)
     filedata = filedata.replace("{{{Clinic}}}", clinic_dropdown)
-    filedata = filedata.replace("{{{Current Date}}}", current_date)
+    filedata = filedata.replace("{{{Current Date}}}", current_date_string)
     with open(savefolder(name) + "index.html", "w+") as file:
         file.write(filedata)
 
@@ -474,7 +471,7 @@ for clinic in clinics:
         filedata = file.read()
     filedata = filedata.replace("{{{Provider}}}", provider_dropdown)
     filedata = filedata.replace("{{{Clinic}}}", clinic_dropdown)
-    filedata = filedata.replace("{{{Current Date}}}", current_date)
+    filedata = filedata.replace("{{{Current Date}}}", current_date_string)
     with open(savefolder(clinic_name) + "index.html", "w+") as file:
         file.write(filedata)
         
@@ -522,7 +519,7 @@ with open("./files/index-base.html", "r") as file:
     filedata = file.read()
 filedata = filedata.replace("{{{Clinics}}}", root_index_clinic)
 filedata = filedata.replace("{{{Provider-Index-Cards}}}", provider_index_cards)
-filedata = filedata.replace("{{{Current Date}}}", current_date)
+filedata = filedata.replace("{{{Current Date}}}", current_date_string)
 with open("docs/" + "index.html", "w+") as file:
     file.write(filedata)
 

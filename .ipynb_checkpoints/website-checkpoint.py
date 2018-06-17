@@ -91,7 +91,7 @@ def make_individual_metric_chart(metric, name):
         metricdf = pd.DataFrame([{"TargetValue": metric_target, "Title": "Target"}])
 
     # Make a Current dataframe to use for Strip Chart.
-    current_date = max(df["Date"])
+    current_date = max(providerdf["Date"])
     current_metric = df[
         (df["Metric"] == metric)
         & (df["Type"] == "Individual")
@@ -199,7 +199,7 @@ def make_clinic_metric_chart(metric, clinic_name):
     if metric_target:
         metricdf = pd.DataFrame([{"TargetValue": metric_target, "Title": "Target"}])
 
-    current_date = max(df["Date"])
+    current_date = max(providerdf["Date"])
     current_metric = df[
         (df["Metric"] == metric)
         & (df["Type"] == "Clinic")
@@ -236,14 +236,14 @@ def make_clinic_metric_chart(metric, clinic_name):
     clinic_providers = sorted(
         set(singleproviders[singleproviders.Clinic == clinic_name].Name)
     )
-    current_date = max(df["Date"])
+    #current_date = max(df["Date"])
     current_metric = df[
         (df["Metric"] == metric)
         & (df["Date"] == current_date)
         & (df["Name"].isin(clinic_providers))
     ]
 
-    start_date = min(df["Date"])
+    start_date = min(providerdf["Date"])
     start_metric = df[
         (df["Metric"] == metric)
         & (df["Date"] == start_date)
@@ -336,12 +336,12 @@ def create_clinic_metrics(clinic_name):
             scale_factor=2,
         )
 
-pool = Pool()
+pool = Pool(16)
 pool.map(create_individual_metrics, singleproviders.Name.unique())
 pool.close()
 pool.join()
 
-pool2 = Pool()
+pool2 = Pool(16)
 pool2.map(create_clinic_metrics, clinics)
 pool2.close()
 pool2.join()
