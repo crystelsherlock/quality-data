@@ -76,7 +76,7 @@ Index,MeridiosName,Name,Type,Clinic
 74,"Short MD, Jason",Jason Short,Individual,NSFM
 75,"Short MD, Vicki",Vicki Short,Individual,NSFM
 76,"Snyder DO, Ashley",Ashley Snyder,Individual,LFM
-77,"Snyder MD, Walter Kalani",Kalani Synder,Individual,FFMC
+77,"Snyder MD, Walter Kalani",Kalani Snyder,Individual,FFMC
 78,"Swanson MD, Mary",Mary Swanson,Individual,NSFM
 79,"Sweeney, Margaret",Margaret Sweeney,Individual,IFP
 80,"Thomson ARNP, Heather",Heather Thomson,Individual,WFM
@@ -100,6 +100,6 @@ Index,MeridiosName,Name,Type,Clinic
 98,"James MD, Michael",Michael James,Individual,IFP
 99,"Lelonek MD, Meghan",Meghan Lelonek,Individual,FHA
 100,"Rieger MD, Robert",Robert Rieger,Individual,IFP
-101,"Sweeney MD, Margaret",Magaret Sweeney,Individual,IFP
+101,"Sweeney MD, Margaret",Margaret Sweeney,Individual,IFP
 102,"McClenahan MD, Richard",,,
 103,"Dubek MD, Martin",,,

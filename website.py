@@ -66,6 +66,7 @@ for file in files:
         # beginning of filename.
         raise ValueError("CSV Filename should have Zero Padded Date.")
 
+
 def make_individual_metric_chart(metric, name):
     """
     Makes a chart for a single metric and a single provider.
@@ -178,6 +179,7 @@ def make_individual_metric_chart(metric, name):
         )
         return chart
 
+
 def make_clinic_metric_chart(metric, clinic_name):
     """
     Makes a chart for a single metric and a clinic.
@@ -284,6 +286,7 @@ def make_clinic_metric_chart(metric, clinic_name):
         chart = (clinic_progress_line) | ranged_dot
         return chart
 
+
 # Need to just do active individuals, main metrics
 singleproviders = names[(names["Type"] == "Individual")]
 
@@ -333,15 +336,16 @@ def create_clinic_metrics(clinic_name):
             scale_factor=2,
         )
 
-pool = Pool(16)
-pool.map(create_individual_metrics, singleproviders.Name.unique())
-pool.close()
-pool.join()
 
-pool2 = Pool(16)
-pool2.map(create_clinic_metrics, clinics)
-pool2.close()
-pool2.join()
+#pool = Pool(16)
+#pool.map(create_individual_metrics, singleproviders.Name.unique())
+#pool.close()
+#pool.join()
+
+#pool2 = Pool(16)
+#pool2.map(create_clinic_metrics, clinics)
+#pool2.close()
+#pool2.join()
 
 # Provider HTML Files
 for name in sorted(set(singleproviders.Name.unique())):
@@ -474,11 +478,12 @@ for clinic in clinics:
     filedata = filedata.replace("{{{Current Date}}}", current_date_string)
     with open(savefolder(clinic_name) + "index.html", "w+") as file:
         file.write(filedata)
-        
+
 # Base HTML File
 root_index_clinic = (
     '<div uk-filter="target: .js-filter"><ul class="uk-subnav uk-subnav-pill">\n'
 )
+
 for clinic in sorted(set(clinics)):
     root_index_clinic += (
         '<li uk-filter-control=".tag-'
@@ -493,23 +498,21 @@ provider_index_cards = (
     '<ul class="js-filter uk-grid-match uk-card-small uk-text-center" uk-grid>\n'
 )
 
-
-
 for name in sorted(set(singleproviders.Name.unique())):
     provider_icon = (
-            '<img class="uk-align-center" src="'
-            + "./pictures/"
-            + str(name).replace(" ", "_")
-            + ".JPG"
-            + '" width="64" height="64">'
-        )
+        '<img class="uk-align-center" src="'
+        + "./pictures/"
+        + str(name).replace(" ", "_")
+        + ".JPG"
+        + '" width="64" height="64">'
+    )
     provider_index_cards += (
         '<li class="tag-'
         + names[names.Name == name].iloc[0].Clinic
         + '"><a class="uk-align-center" href="./'
         + str(name).replace(" ", "_")
         + '/"><div class="uk-card uk-width-medium uk-card-hover uk-card-default uk-card-body">'
-        + provider_icon 
+        + provider_icon
         + name
         + "</div></a></li>\n"
     )
@@ -522,4 +525,3 @@ filedata = filedata.replace("{{{Provider-Index-Cards}}}", provider_index_cards)
 filedata = filedata.replace("{{{Current Date}}}", current_date_string)
 with open("docs/" + "index.html", "w+") as file:
     file.write(filedata)
-
