@@ -515,7 +515,7 @@ for name in sorted(singleproviders.Name.unique(), key=lambda x: x.split(" ")[1])
         + "./pictures/"
         + str(name).replace(" ", "_")
         + ".JPG"
-        + '" width="64" height="64">'
+        + '" width="64" height="64" class="uk-border-circle">'
     )
     provider_index_cards += (
         '<li class="tag-'
