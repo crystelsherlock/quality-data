@@ -234,8 +234,10 @@ def make_clinic_metric_chart(metric, clinic_name):
         )
 
     clinic_providers = sorted(
-        set(singleproviders[singleproviders.Clinic == clinic_name].Name)
+        singleproviders[singleproviders.Clinic == clinic_name].Name.unique(),
+        key=lambda x: x.split(" ")[1],
     )
+
     current_metric = df[
         (df["Metric"] == metric)
         & (df["Date"] == current_date)
@@ -337,27 +339,25 @@ def create_clinic_metrics(clinic_name):
         )
 
 
-#pool = Pool(16)
-#pool.map(create_individual_metrics, singleproviders.Name.unique())
-#pool.close()
-#pool.join()
+# pool = Pool(16)
+# pool.map(create_individual_metrics, singleproviders.Name.unique())
+# pool.close()
+# pool.join()
 
-#pool2 = Pool(16)
-#pool2.map(create_clinic_metrics, clinics)
-#pool2.close()
-#pool2.join()
+# pool2 = Pool(16)
+# pool2.map(create_clinic_metrics, clinics)
+# pool2.close()
+# pool2.join()
 
 # Provider HTML Files
 
 FCN_logo = "./files/pictures/logo.png"
 if os.path.isfile(FCN_logo):
-	if not os.path.exists("./docs/pictures/"):
-		os.makedirs("./docs/pictures/")
-	shutil.copyfile(
-		FCN_logo, "./docs/pictures/logo.png"
-	)
+    if not os.path.exists("./docs/pictures/"):
+        os.makedirs("./docs/pictures/")
+    shutil.copyfile(FCN_logo, "./docs/pictures/logo.png")
 
-for name in sorted(set(singleproviders.Name.unique())):
+for name in sorted(singleproviders.Name.unique(), key=lambda x: x.split(" ")[1]):
     provider_picture = "./files/pictures/" + str(name).replace(" ", "_") + ".JPG"
     if os.path.isfile(provider_picture):
         if not os.path.exists("./docs/pictures/"):
@@ -384,7 +384,8 @@ for name in sorted(set(singleproviders.Name.unique())):
     clinic_name = names[names.Name == name].iloc[0].Clinic
 
     for sameclinicprovider in sorted(
-        set(singleproviders[singleproviders.Clinic == clinic_name].Name)
+        singleproviders[singleproviders.Clinic == clinic_name].Name,
+        key=lambda x: x.split(" ")[1],
     ):
         if name == sameclinicprovider:
             provider_dropdown += (
@@ -442,7 +443,8 @@ for clinic in clinics:
     clinic_name = clinic
 
     for sameclinicprovider in sorted(
-        set(singleproviders[singleproviders.Clinic == clinic_name].Name)
+        singleproviders[singleproviders.Clinic == clinic_name].Name,
+        key=lambda x: x.split(" ")[1],
     ):
         provider_dropdown += (
             '<li><a href="../'
@@ -507,7 +509,7 @@ provider_index_cards = (
     '<ul class="js-filter uk-grid-match uk-card-small uk-text-center" uk-grid>\n'
 )
 
-for name in sorted(set(singleproviders.Name.unique())):
+for name in sorted(singleproviders.Name.unique(), key=lambda x: x.split(" ")[1]):
     provider_icon = (
         '<img class="uk-align-center" src="'
         + "./pictures/"
