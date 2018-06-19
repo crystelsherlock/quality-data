@@ -348,6 +348,15 @@ def create_clinic_metrics(clinic_name):
 #pool2.join()
 
 # Provider HTML Files
+
+FCN_logo = "./files/pictures/logo.png"
+if os.path.isfile(FCN_logo):
+	if not os.path.exists("./docs/pictures/"):
+		os.makedirs("./docs/pictures/")
+	shutil.copyfile(
+		FCN_logo, "./docs/pictures/logo.png"
+	)
+
 for name in sorted(set(singleproviders.Name.unique())):
     provider_picture = "./files/pictures/" + str(name).replace(" ", "_") + ".JPG"
     if os.path.isfile(provider_picture):
