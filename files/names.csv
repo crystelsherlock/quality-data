@@ -27,7 +27,7 @@ Index,MeridiosName,Name,Type,Clinic
 25,"Burden MD, Margaret",Margaret Burden,Individual,LFM
 26,"Bylund MD, Erik",Erik Bylund,Individual,NCFP
 27,"Caldwell MD, Robin",Robin Caldwell,Individual,LFM
-28,"Eiford PA-C, William",William Eiford,Individual,NSFM
+28,"Eiford PA-C, William",,,
 29,"Estep MD, Roger",Roger Estep,Individual,NCFP
 30,"Fleming PA-C, Michael",Michael Fleming,Individual,LFM
 31,"Floyd MD, Anneliese",Anneliese Floyd,Individual,NSFM
@@ -43,7 +43,7 @@ Index,MeridiosName,Name,Type,Clinic
 41,"Hartwell MD, Larry",Larry Hartwell,Individual,LFM
 42,"Hein MD, Shelby",Shelby Hein,Individual,SFM
 43,"Herdman MD, S. Harry",Harry Herdman,Individual,SFM
-44,"Herrman ARNP, Sarah",Sarah Herrman,Individual,NSFM
+44,"Herrman ARNP, Sarah",,,
 45,"Hiemstra DO, John",John Hiemstra,Individual,LFM
 46,"Honey DO, Heather",Heather Honey,Individual,SFM
 47,"Honey MD, Robert",Ryan Honey,Individual,FHA
