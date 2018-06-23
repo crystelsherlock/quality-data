@@ -142,7 +142,7 @@ def make_individual_metric_chart(metric, name):
 
     fcn_current_strip_chart = (
         alt.Chart(current_metric)
-        .mark_tick(color="#eee")
+        .mark_tick(color="#ddd")
         .encode(
             alt.Y(
                 "Percentage:Q",
@@ -234,7 +234,7 @@ def make_clinic_metric_chart(metric, clinic_name):
         )
 
     clinic_providers = sorted(
-        singleproviders[singleproviders.Clinic == clinic_name].Name.unique(),
+        single_providers[single_providers.Clinic == clinic_name].Name.unique(),
         key=lambda x: x.split(" ")[1],
     )
 
@@ -270,7 +270,10 @@ def make_clinic_metric_chart(metric, clinic_name):
     ranged_dot += (
         alt.Chart(current_metric)
         .mark_point(size=100, opacity=1, filled=True, color="#1f77b4")
-        .encode(y="Percentage:Q", x="Name:N")
+        .encode(
+        	alt.Y("Percentage:Q",), 
+        	alt.X("Name:N",),
+    )
     )
 
     ranged_dot_rule = (
@@ -290,7 +293,10 @@ def make_clinic_metric_chart(metric, clinic_name):
 
 
 # Need to just do active individuals, main metrics
-singleproviders = names[(names["Type"] == "Individual")]
+single_providers = names[(names["Type"] == "Individual")]
+sorted_single_provider_names = sorted(
+    single_providers.Name.unique(), key=lambda x: x.split(" ")[1]
+)
 
 clinics = sorted(set(df[(df["Type"] == "Clinic")].Name.unique()))
 
@@ -339,15 +345,15 @@ def create_clinic_metrics(clinic_name):
         )
 
 
-# pool = Pool(16)
-# pool.map(create_individual_metrics, singleproviders.Name.unique())
-# pool.close()
-# pool.join()
+#pool = Pool()
+#pool.map(create_individual_metrics, single_providers.Name.unique())
+#pool.close()
+#pool.join()
 
-# pool2 = Pool(16)
-# pool2.map(create_clinic_metrics, clinics)
-# pool2.close()
-# pool2.join()
+pool2 = Pool()
+pool2.map(create_clinic_metrics, clinics)
+pool2.close()
+pool2.join()
 
 # Provider HTML Files
 
@@ -357,7 +363,7 @@ if os.path.isfile(FCN_logo):
         os.makedirs("./docs/pictures/")
     shutil.copyfile(FCN_logo, "./docs/pictures/logo.png")
 
-for name in sorted(singleproviders.Name.unique(), key=lambda x: x.split(" ")[1]):
+for name in sorted_single_provider_names:
     provider_picture = "./files/pictures/" + str(name).replace(" ", "_") + ".JPG"
     if os.path.isfile(provider_picture):
         if not os.path.exists("./docs/pictures/"):
@@ -383,22 +389,22 @@ for name in sorted(singleproviders.Name.unique(), key=lambda x: x.split(" ")[1])
 
     clinic_name = names[names.Name == name].iloc[0].Clinic
 
-    for sameclinicprovider in sorted(
-        singleproviders[singleproviders.Clinic == clinic_name].Name,
+    for same_clinic_provider in sorted(
+        single_providers[single_providers.Clinic == clinic_name].Name,
         key=lambda x: x.split(" ")[1],
     ):
-        if name == sameclinicprovider:
+        if name == same_clinic_provider:
             provider_dropdown += (
                 '<li class="uk-active">'
-                + sameclinicprovider
+                + same_clinic_provider
                 + '<span uk-icon="icon: check"></span></li>\n'
             )
         else:
             provider_dropdown += (
                 '<li><a href="../'
-                + str(sameclinicprovider).replace(" ", "_")
+                + str(same_clinic_provider).replace(" ", "_")
                 + '/">'
-                + sameclinicprovider
+                + same_clinic_provider
                 + "</a></li>\n"
             )
 
@@ -442,15 +448,15 @@ for clinic in clinics:
 
     clinic_name = clinic
 
-    for sameclinicprovider in sorted(
-        singleproviders[singleproviders.Clinic == clinic_name].Name,
+    for same_clinic_provider in sorted(
+        single_providers[single_providers.Clinic == clinic_name].Name,
         key=lambda x: x.split(" ")[1],
     ):
         provider_dropdown += (
             '<li><a href="../'
-            + str(sameclinicprovider).replace(" ", "_")
+            + str(same_clinic_provider).replace(" ", "_")
             + '/">'
-            + sameclinicprovider
+            + same_clinic_provider
             + "</a></li>\n"
         )
 
@@ -495,7 +501,7 @@ root_index_clinic = (
     '<div uk-filter="target: .js-filter"><ul class="uk-subnav uk-subnav-pill">\n'
 )
 
-for clinic in sorted(set(clinics)):
+for clinic in clinics:
     root_index_clinic += (
         '<li uk-filter-control=".tag-'
         + clinic
@@ -509,7 +515,7 @@ provider_index_cards = (
     '<ul class="js-filter uk-grid-match uk-card-small uk-text-center" uk-grid>\n'
 )
 
-for name in sorted(singleproviders.Name.unique(), key=lambda x: x.split(" ")[1]):
+for name in sorted_single_provider_names:
     provider_icon = (
         '<img class="uk-align-center" src="'
         + "./pictures/"
