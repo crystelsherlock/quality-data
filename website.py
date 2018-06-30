@@ -342,15 +342,15 @@ def create_clinic_metrics(clinic_name):
         )
 
 
-# pool = Pool()
-# pool.map(create_individual_metrics, single_providers.Name.unique())
-# pool.close()
-# pool.join()
+pool = Pool(4)
+pool.map(create_individual_metrics, single_providers.Name.unique())
+pool.close()
+pool.join()
 
-# pool2 = Pool()
-# pool2.map(create_clinic_metrics, clinics)
-# pool2.close()
-# pool2.join()
+pool2 = Pool(4)
+pool2.map(create_clinic_metrics, clinics)
+pool2.close()
+pool2.join()
 
 # Provider HTML Files
 
