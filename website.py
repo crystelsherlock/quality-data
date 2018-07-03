@@ -172,15 +172,15 @@ def make_individual_metric_chart(metric, name, savefolder):
         chart = provider_progress_line + clinic_progress_line + metric_target_rule | (
             fcn_current_strip_chart + provider_highlight_strip + provider_percent
         )
-        chart.save(savefolder + str(metric).replace(" ", "_") + ".png", scale_factor=2)
+        chart.save(savefolder + str(metric).replace(" ", "_") + ".json", scale_factor=2)
     else:
         chart = provider_progress_line + clinic_progress_line | (
             fcn_current_strip_chart + provider_highlight_strip + provider_percent
         )
-        chart.save(savefolder + str(metric).replace(" ", "_") + ".png", scale_factor=2)
+        chart.save(savefolder + str(metric).replace(" ", "_") + ".json", scale_factor=2)
 
 
-def make_clinic_metric_chart(metric, clinic_name):
+def make_clinic_metric_chart(metric, clinic_name, savefolder):
     """
     Makes a chart for a single metric and a clinic.
     
@@ -283,10 +283,10 @@ def make_clinic_metric_chart(metric, clinic_name):
         chart = (
             clinic_progress_line + metric_target_rule
         ) | ranged_dot + ranged_dot_rule
-        chart.save(savefolder + str(metric).replace(" ", "_") + ".png", scale_factor=2)
+        chart.save(savefolder + str(metric).replace(" ", "_") + ".json", scale_factor=2)
     else:
         chart = (clinic_progress_line) | ranged_dot
-        chart.save(savefolder + str(metric).replace(" ", "_") + ".png", scale_factor=2)
+        chart.save(savefolder + str(metric).replace(" ", "_") + ".json", scale_factor=2)
 
 
 # Need to just do active individuals, main metrics
@@ -332,18 +332,18 @@ def create_individual_metrics(name):
 
 def create_clinic_metrics(clinic_name):
     for metric in main_metrics:
-        chart = make_clinic_metric_chart(metric, clinic_name, savefolder(name))
+        chart = make_clinic_metric_chart(metric, clinic_name, savefolder(clinic_name))
 
 
-pool = Pool(4)
-pool.map(create_individual_metrics, single_providers.Name.unique())
-pool.close()
-pool.join()
+#pool = Pool()
+#pool.map(create_individual_metrics, single_providers.Name.unique())
+#pool.close()
+#pool.join()
 
-pool2 = Pool(4)
-pool2.map(create_clinic_metrics, clinics)
-pool2.close()
-pool2.join()
+#pool2 = Pool()
+# pool2.map(create_clinic_metrics, clinics)
+# pool2.close()
+# pool2.join()
 
 # Provider HTML Files
 
