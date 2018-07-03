@@ -67,7 +67,7 @@ for file in files:
         raise ValueError("CSV Filename should have Zero Padded Date.")
 
 
-def make_individual_metric_chart(metric, name):
+def make_individual_metric_chart(metric, name, savefolder):
     """
     Makes a chart for a single metric and a single provider.
     
@@ -172,12 +172,12 @@ def make_individual_metric_chart(metric, name):
         chart = provider_progress_line + clinic_progress_line + metric_target_rule | (
             fcn_current_strip_chart + provider_highlight_strip + provider_percent
         )
-        return chart
+        chart.save(savefolder + str(metric).replace(" ", "_") + ".png", scale_factor=2)
     else:
         chart = provider_progress_line + clinic_progress_line | (
             fcn_current_strip_chart + provider_highlight_strip + provider_percent
         )
-        return chart
+        chart.save(savefolder + str(metric).replace(" ", "_") + ".png", scale_factor=2)
 
 
 def make_clinic_metric_chart(metric, clinic_name):
@@ -283,10 +283,10 @@ def make_clinic_metric_chart(metric, clinic_name):
         chart = (
             clinic_progress_line + metric_target_rule
         ) | ranged_dot + ranged_dot_rule
-        return chart
+        chart.save(savefolder + str(metric).replace(" ", "_") + ".png", scale_factor=2)
     else:
         chart = (clinic_progress_line) | ranged_dot
-        return chart
+        chart.save(savefolder + str(metric).replace(" ", "_") + ".png", scale_factor=2)
 
 
 # Need to just do active individuals, main metrics
@@ -327,19 +327,12 @@ def savefolder(name):
 
 def create_individual_metrics(name):
     for metric in main_metrics:
-        chart = make_individual_metric_chart(metric, name)
-        chart.save(
-            savefolder(name) + str(metric).replace(" ", "_") + ".png", scale_factor=2
-        )
+        make_individual_metric_chart(metric, name, savefolder(name))
 
 
 def create_clinic_metrics(clinic_name):
     for metric in main_metrics:
-        chart = make_clinic_metric_chart(metric, clinic_name)
-        chart.save(
-            savefolder(clinic_name) + str(metric).replace(" ", "_") + ".png",
-            scale_factor=2,
-        )
+        chart = make_clinic_metric_chart(metric, clinic_name, savefolder(name))
 
 
 pool = Pool(4)
