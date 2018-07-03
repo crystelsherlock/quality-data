@@ -258,7 +258,7 @@ def make_clinic_metric_chart(metric, clinic_name, savefolder):
         .encode(
             alt.Y(
                 "Percentage:Q",
-                axis=alt.Axis(format="%", title="",),
+                axis=alt.Axis(format="%", title=""),
                 scale=alt.Scale(domain=(0, 1)),
             ),
             alt.X("Name:N", axis=alt.Axis(title=""), sort=clinic_providers),
@@ -335,10 +335,10 @@ def create_clinic_metrics(clinic_name):
         chart = make_clinic_metric_chart(metric, clinic_name, savefolder(clinic_name))
 
 
-#pool = Pool()
-#pool.map(create_individual_metrics, single_providers.Name.unique())
-#pool.close()
-#pool.join()
+pool = Pool()
+pool.map(create_individual_metrics, single_providers.Name.unique())
+pool.close()
+pool.join()
 
 pool2 = Pool()
 pool2.map(create_clinic_metrics, clinics)
