@@ -270,7 +270,7 @@ def make_clinic_metric_chart(metric, clinic_name, savefolder):
     ranged_dot += (
         alt.Chart(current_metric)
         .mark_point(size=100, opacity=1, filled=True, color="#1f77b4")
-        .encode(alt.Y("Percentage:Q"), alt.X("Name:N"))
+        .encode(alt.Y("Percentage:Q"), alt.X("Name:N", sort=clinic_providers))
     )
 
     ranged_dot_rule = (
@@ -335,15 +335,15 @@ def create_clinic_metrics(clinic_name):
         chart = make_clinic_metric_chart(metric, clinic_name, savefolder(clinic_name))
 
 
-#pool = Pool()
-#pool.map(create_individual_metrics, single_providers.Name.unique())
-#pool.close()
-#pool.join()
-#
-#pool2 = Pool()
-#pool2.map(create_clinic_metrics, clinics)
-#pool2.close()
-#pool2.join()
+pool = Pool()
+pool.map(create_individual_metrics, single_providers.Name.unique())
+pool.close()
+pool.join()
+
+pool2 = Pool()
+pool2.map(create_clinic_metrics, clinics)
+pool2.close()
+pool2.join()
 
 # Provider HTML Files
 
