@@ -100,12 +100,12 @@
 </div>
 
 <script type="text/javascript">
-	function insert_chart(metric, second-div) {
+	function insert_chart(metric, seconddiv) {
 		var spec = "./" +metric + ".json"; 
 		if(!second-div) { 
 		    var idname = "#" + metric;
 	    } else {
-            var idname = "#" + second-div;
+            var idname = "#" + seconddiv;
         }
 		vegaEmbed(idname, spec, {actions: false}).then(function(result) {}).catch(console.error);
 	}
