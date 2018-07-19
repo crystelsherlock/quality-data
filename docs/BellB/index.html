@@ -108,7 +108,7 @@
 
 <script type="text/javascript">
 	function insert_chart(metric, seconddiv) {
-		var spec = "./" +metric + ".json"; 
+		var spec = "./" + metric + ".json"; 
 		if(!seconddiv) { 
 		    var idname = "#" + metric;
 	    } else {
@@ -116,7 +116,7 @@
         }
 		vegaEmbed(idname, spec, {actions: false}).then(function(result) {}).catch(console.error);
 	}
-	insert_chart('DM_Eye_Exam');
+	insert_chart('DM_Eye_Exam', 'DM_Eye_Exam');
 	insert_chart('DM_Eye_Exam', 'DM_Eye_Exam_2');
 	insert_chart('DM_Foot_Exam');
 	insert_chart('DM_Foot_Exam', 'DM_Foot_Exam_2');
