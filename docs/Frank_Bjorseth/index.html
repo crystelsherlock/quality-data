@@ -57,6 +57,36 @@
 </div>
 
 
+<a class="uk-button uk-button-secondary uk-float-right" href="#modal-help" uk-toggle>Help?</a>
+
+<div id="modal-help" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <div class="uk-modal-header">
+            <h2 class="uk-modal-title">Help with Interpretation</h2>
+        </div>
+        <div class="uk-modal-body" uk-overflow-auto>
+		<h3>Color Legend</h3>
+<p><b>Color Legend: </b>
+<span style="color:#c5b0d5; background:#9467bd; padding:4px; border-radius: 4px;">Provider</span> 
+<span style="color:#ffbb78; background:#ff7f0e; padding:4px; border-radius: 4px;">Clinic</span>
+<span style="color:#aec7e8; background:#1f77b4; padding:4px; border-radius: 4px;">FCN</span> 
+<span style="color:#98df8a; background:#2ca02c; padding:4px; border-radius: 4px;">Target</span> 
+</p>
+
+<h3>Strip Chart</h3>
+<p>Shows the distribution of all provider panels at FCN. The individual provider is highlighted.</p>
+<img src="../strip_chart.png" width="176" height="239" style="display:block" class="uk-align-center">
+<p>On this example, you can see that the provider's panel is doing better than most at FCN. You can also see there's a wide range of panels &mdash;
+ typically that means this quality measure is more difficult for us. Nearly all panels at FCN are below the target. </p>
+<h3>Quality Comet Chart</h3>
+<p>The 'quality comets' show how a provider panel is changing over time. The tail shows size and direction of changes. If there's no tail, then there hasn't been significant change.</p>
+<img src="../quality_comet.png" width="339" height="169" style="display:block" class="uk-align-center">
+<p>On this example, you can see that 3 provider panels have dramatically improved. A few panels are doing a little improvement and a few are mostly unchanged. Looking that the height of the dots, you can see most are above target &mdash; so this has learned how to do this particular quality measure.</p>
+        </div>
+    </div>
+</div>
+
 <ul uk-switcher="animation: uk-animation-fade" uk-tab>
     <li><a href="#">2018 Core</a></li>
     <li><a href="#">Screening</a></li>
