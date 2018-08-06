@@ -958,12 +958,11 @@ Ferndale Family Medical Center,WCV 3-6 yr,367,398,0.9221,00:06.1
 "Hartwell MD, Larry",DM PTS 40 to 75 w/STATIN,76,102,0.7451,49:57.2
 "Hartwell MD, Larry",DM PTS 55-75 w/ACE/ARB,66,88,0.7500,49:52.1
 "Hartwell MD, Larry",Eye exam,72,156,0.4615,38:16.4
-"Hartwell MD, Larry",Foot Exam,723,156,4.6346,38:22.0
+"Hartwell MD, Larry",Foot Exam,72,156,4.6346,38:22.0
 "Hartwell MD, Larry",HgbA1c < 7.0                     ,83,156,0.5321,38:28.0
 "Hartwell MD, Larry",HgbA1c NOT > 9.0 (poor control) ,144,156,0.9231,38:33.4
 "Hartwell MD, Larry",Hypertension Patients 18-59 years BP <140/90,79,118,0.6695,38:50.3
 "Hartwell MD, Larry",Hypertension Patients over 18 BP <140/90,393,459,0.8562,39:03.9
-"Hartwell MD, Larry",Hypertension Patients over 59 years BP <150/90,3274,349,9.3811,38:56.7
 "Hartwell MD, Larry",Mammogram Ages 52 -74,110,212,0.5189,39:46.0
 "Hartwell MD, Larry",Nephropathy Assessment,111,156,0.7115,38:39.6
 "Hartwell MD, Larry",Pap Smear Report,88,240,0.3667,51:17.8
@@ -1942,7 +1941,6 @@ North Sound Family Medicine,WCV 3-6 yr,528,583,0.9057,00:06.1
 "Short MD, Vicki",Mammogram Ages 52 -74,230,354,0.6497,39:46.0
 "Short MD, Vicki",Nephropathy Assessment,54,79,0.6835,38:39.6
 "Short MD, Vicki",Pap Smear Report,348,648,0.5370,51:17.8
-"Short MD, Vicki",Pneumovax - DM patients w/current pneumovax,662,79,8.3797,40:11.7
 "Short MD, Vicki",Pneumovax - Patients Age>65 w/current pneumovax,220,271,0.8118,40:18.7
 "Short MD, Vicki",Pneumovax - Smokers w/current pneumovax,41,83,0.4940,40:25.9
 "Short MD, Vicki",Smoking Cessation Advice or Treatment ,4,6,0.6667,38:45.9
@@ -2041,7 +2039,6 @@ Squalicum Family Medicine,WCV 3-6 yr,282,317,0.8896,00:06.1
 "Stewart ARNP, Sarah",Hypertension Patients over 59 years BP <150/90,3,3,1.0000,38:56.7
 "Stewart ARNP, Sarah",Mammogram Ages 52 -74,17,23,0.7391,39:46.0
 "Stewart ARNP, Sarah",Nephropathy Assessment,0,0,#DIV/0!,38:39.6
-"Stewart ARNP, Sarah",Pap Smear Report,66,18,3.6667,51:17.8
 "Stewart ARNP, Sarah",Pneumovax - DM patients w/current pneumovax,0,0,#DIV/0!,40:11.7
 "Stewart ARNP, Sarah",Pneumovax - Patients Age>65 w/current pneumovax,8,8,1.0000,40:18.7
 "Stewart ARNP, Sarah",Pneumovax - Smokers w/current pneumovax,1,6,0.1667,40:25.9
