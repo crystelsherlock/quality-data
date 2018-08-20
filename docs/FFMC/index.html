@@ -57,18 +57,17 @@
 <a class="uk-inline" style="color:#1F77B4" href="../FCN/index.html">FCN</a>
 </div>
 
-
 <a class="uk-button uk-button-secondary uk-float-right" href="#modal-help" uk-toggle>Help?</a>
 
 <div id="modal-help" uk-modal>
-    <div class="uk-modal-dialog">
-        <button class="uk-modal-close-default" type="button" uk-close></button>
-        <div class="uk-modal-header">
-            <h2 class="uk-modal-title">Help with Interpretation</h2>
-        </div>
-        <div class="uk-modal-body" uk-overflow-auto>
-		<h3>Color Legend</h3>
-<p><b>Color Legend: </b>
+<div class="uk-modal-dialog">
+<button class="uk-modal-close-default" type="button" uk-close></button>
+<div class="uk-modal-header">
+<h2 class="uk-modal-title">Help with Interpretation</h2>
+</div>
+<div class="uk-modal-body" uk-overflow-auto>
+<h3>Color Legend</h3>
+<p>
 <span style="color:#c5b0d5; background:#9467bd; padding:4px; border-radius: 4px;">Provider</span> 
 <span style="color:#ffbb78; background:#ff7f0e; padding:4px; border-radius: 4px;">Clinic</span>
 <span style="color:#aec7e8; background:#1f77b4; padding:4px; border-radius: 4px;">FCN</span> 
@@ -76,17 +75,18 @@
 </p>
 
 <h3>Strip Chart</h3>
-<p>Shows the distribution of all provider panels at FCN. The individual provider is highlighted.</p>
+<p>Shows the distribution of all provider panels at FCN with the individual provider highlighted.</p>
 <img src="../strip_chart.png" width="176" height="239" style="display:block" class="uk-align-center">
-<p>On this example, you can see that the provider's panel is doing better than most at FCN. You can also see there's a wide range of panels &mdash;
- typically that means this quality measure is more difficult for us. Nearly all panels at FCN are below the target. </p>
+<p>Here you can see that the provider's panel is doing better than most at FCN. You can also see there's a wide range of panels &mdash;
+typically that means this quality measure is more difficult for us.</p>
 <h3>Quality Comet Chart</h3>
-<p>The 'quality comets' show how a provider panel is changing over time. The tail shows size and direction of changes. If there's no tail, then there hasn't been significant change.</p>
+<p>The 'quality comets' show how individual panels are changing over time. The tail shows size and direction of changes. If there's no tail, then there hasn't been significant change.</p>
 <img src="../quality_comet.png" width="339" height="169" style="display:block" class="uk-align-center">
-<p>On this example, you can see that 3 provider panels have dramatically improved. A few panels are doing a little improvement and a few are mostly unchanged. Looking that the height of the dots, you can see most are above target &mdash; so this has learned how to do this particular quality measure.</p>
-        </div>
-    </div>
+<p>Here you can see that 3 provider panels have dramatically improved. Several are doing a little improvement and a few are mostly unchanged. Looking that the height of the dots, you can see most are above target &mdash; so there has probably been some work and learning on this quality measure.</p>
 </div>
+</div>
+</div>
+
 
 <ul uk-switcher="animation: uk-animation-fade" uk-tab>
     <li><a href="#">2018 Core</a></li>
@@ -150,7 +150,7 @@
 
 <br />
 <hr class="uk-divider-icon">
-<p class="uk-text-small uk-text-meta">Updated: 08/06/2018</p>
+<p class="uk-text-bold">Updated: 08/06/2018</p>
 </div>
 
 <script type="text/javascript">
